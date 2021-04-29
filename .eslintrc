@@ -1,0 +1,46 @@
+{
+    "parser": "@babel/eslint-parser",
+    "parserOptions": {
+        "ecmaVersion": 11,
+        "sourceType": "module",
+        "allowImportExportEverywhere": true
+    },
+    "env": {
+        "browser": true,
+        "es6": true,
+        "node": true,
+        "commonjs": true
+    },
+    // 서드 파티 플러그인들 (eslint-plugin- 생략 가능)
+    "plugins": [
+        "node",
+        "prettier",
+        "jest"
+    ],
+    // 추가한 플러그인에서 적용시킬 규칙을 설정함
+    "extends": [
+        "eslint:recommended",
+        "prettier",
+        "plugin:jest/recommended"
+    ],
+    // 원하는 lint 규칙 정하기
+    "rules": {
+        "prettier/prettier": ["error", {
+            "endOfLine": "auto"
+        }],
+        "block-scoped-var": "error",
+        "eqeqeq": "error",
+        "no-var": "error",
+        "prefer-const": "error",
+        "eol-last": "error",
+        "prefer-arrow-callback": "error",
+        "no-trailing-spaces": "error",
+        "quotes": [
+            "warn",
+            "single",
+            {
+                "avoidEscape": true
+            }
+        ]
+    }
+}
