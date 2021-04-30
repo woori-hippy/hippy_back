@@ -3404,11 +3404,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.0",
-<<<<<<< HEAD
-  "updatedAt": "2021-04-30T11:48:47.437Z",
-=======
-  "updatedAt": "2021-04-30T11:31:20.081Z",
->>>>>>> feature/mypage
+  "updatedAt": "2021-04-30T12:21:44.124Z",
   "devdoc": {
     "details": "Unsigned math operations with safety checks that revert on error",
     "methods": {},
