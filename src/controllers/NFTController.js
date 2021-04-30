@@ -1,5 +1,5 @@
 import express from 'express';
-import * as NFTService from '../services/NFTService';
+import * as NFTService from '../repositorys/NFTService';
 
 const router = express.Router();
 

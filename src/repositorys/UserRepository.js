@@ -9,10 +9,18 @@ export const findById = async id => {
   }
 };
 
-export const createByLocal = async data => {
-  const { password, userId, name, email, address } = data;
+export const findByEmailAndLocal = async email => {
   try {
-    return prisma.user.create({ data: { password, userId, name, email, address } });
+    return prisma.user.findMany({ where: { email, provider: 'local' } });
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const createByLocal = async data => {
+  const { email, password, name } = data;
+  try {
+    return prisma.user.create({ data: { password, email, name, provider: 'local' } });
   } catch (err) {
     console.error(err);
   }
