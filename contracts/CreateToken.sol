@@ -13,10 +13,12 @@ contract CreateToken is ERC721, ERC165 {
     address payable public owner;
     mapping(bytes4 => bool) supportedInterfaces;
 
-    mapping(uint256 => address) tokenOwners;
-    mapping(address => uint256) balances;
-    mapping(uint256 => address) allowance;
-    mapping(address => mapping(address => bool)) operators;
+    mapping(uint256 => address) tokenOwners; //소유자 정보를 담는 데이터
+    mapping(address => uint256) balances; //특정 소유계정이 가진 토큰의 수
+    mapping(uint256 => address) allowance; //어떤 토큰 아이디를 어떤 계정이 소유권을 이전 할 수 있는 권한을 갖고 있는가
+    //제3자가 승인을할 수 있게 함.
+    mapping(address => mapping(address => bool)) operators; //어떤 소유자 계정이 중계 계정, 앞 address -> 소유자
+    //2번쨰 address -> 중계인 계정
 
     mapping(uint256 => string) tokenURIs;
 
@@ -24,11 +26,13 @@ contract CreateToken is ERC721, ERC165 {
         string ipfsHash;
     }
 
+    //asset[] 이미지 조합 , hash 값들이 들어가 있음.
     asset[] public allTokens;
 
     //for enumeration
-    uint256[] public allValidTokenIds; //same as allTokens but does't have invalid tokens
+    uint256[] public allValidTokenIds; //유효한 토큰 id만 갖고 있는 배열
     mapping(uint256 => uint256) private allValidTokenIndex;
+    //토큰 id만 가지고 인데스를 반환
 
     modifier onlyOwner {
         require(msg.sender == owner, 'Only owner can call this function.');
@@ -42,18 +46,21 @@ contract CreateToken is ERC721, ERC165 {
         supportedInterfaces[0x5b5e139f] = true; //ERC721Metadata
     }
 
+    //ERC 165 구현
     function supportsInterface(bytes4 interfaceID) external view returns (bool) {
         return supportedInterfaces[interfaceID];
     }
 
+    //토큰 소유 계정을 key로 해서 값을 리턴 총 토큰 수
     function balanceOf(address _owner) external view returns (uint256) {
         require(_owner != address(0));
         return balances[_owner];
     }
 
+    //토큰 id를 받아서 토큰 id 를 토큰 Owner에 넣어서 리턴.
     function ownerOf(uint256 _tokenId) public view returns (address) {
         address addr_owner = tokenOwners[_tokenId];
-        require(addr_owner != address(0), 'Token is invalid');
+        require(addr_owner != address(0), 'Token is invalid'); //소유자가 0이라면 예외처리
         return addr_owner;
     }
 
@@ -64,21 +71,25 @@ contract CreateToken is ERC721, ERC165 {
     ) public payable {
         address addr_owner = ownerOf(_tokenId);
 
+        //토큰 계정이랑 from 계정이 일치하는지 확인.
         require(addr_owner == _from, '_from is NOT the owner of the token');
-
+        //to 계정은 null이면 안됨
         require(_to != address(0), 'Transfer _to address 0x0');
 
+        //allowance 게정도 가능. transferfrom 함수를호출 가능 , 즉 alloowance 계정인지.
         address addr_allowed = allowance[_tokenId];
-        bool isOp = operators[addr_owner][msg.sender];
+        bool isOp = operators[addr_owner][msg.sender]; //operators(중계인 계정들)이 msg.sender에게 승인을 했는지?
 
         require(addr_owner == msg.sender || addr_allowed == msg.sender || isOp, 'msg.sender does not have transferable token');
-
-        //transfer : change the owner of the token
+        //위 조건들이 반영되면 시작.
+        // 토큰주인을 _to 계정으로 변경.
+        //밸런스(_프롬)[토큰 수 -1]
+        //밸런스(_to)[토큰수 + 1]
         tokenOwners[_tokenId] = _to;
         balances[_from] = balances[_from].sub(1);
         balances[_to] = balances[_to].add(1);
 
-        //reset approved address
+        //소유계정이 바꼈기 때문에 delete를 해준다.
         if (allowance[_tokenId] != address(0)) {
             delete allowance[_tokenId];
         }
@@ -110,6 +121,7 @@ contract CreateToken is ERC721, ERC165 {
         safeTransferFrom(_from, _to, _tokenId, '');
     }
 
+    // 소유권 이전?
     function approve(address _approved, uint256 _tokenId) external payable {
         address addr_owner = ownerOf(_tokenId);
         bool isOp = operators[addr_owner][msg.sender];
@@ -134,27 +146,35 @@ contract CreateToken is ERC721, ERC165 {
         return operators[_owner][_operator];
     }
 
+    //
+
     //non-ERC721 standard
     //
     //
-    function() external payable {}
 
-    function mint(address _owner, string calldata ipfsHash) external payable {
+    function mint(address account, string calldata ipfsHash) external payable returns (uint256) {
         asset memory newAsset = asset(ipfsHash);
+
+        //allTokens.push(newAsset) - 1; 이거를 토큰 id로 하기로 했음.
+
         uint256 tokenId = allTokens.push(newAsset) - 1;
         //token id starts from 0, index of assets array
-        tokenOwners[tokenId] = _owner;
-        balances[_owner] = balances[_owner].add(1);
+
+        //아 토큰 id로 토큰오너스 라느 곳에 account에 보내줌.
+        tokenOwners[tokenId] = account;
+        balances[account] = balances[account].add(1);
 
         //for enumeration
+        //인덱스를 저장 함. 유효한 토큰만 저장함.
         allValidTokenIndex[tokenId] = allValidTokenIds.length;
         //index starts from 0
         allValidTokenIds.push(tokenId);
 
         //Token Metadata
-        tokenURIs[tokenId] = Strings.strConcat(baseTokenURI(), 'QmdDW36bvr2W6ua4FxnT8bKysXhYEUo7QbLTbkGW4Foxr8');
+        tokenURIs[tokenId] = Strings.strConcat(baseTokenURI(), ipfsHash);
 
-        emit Transfer(address(0), _owner, tokenId);
+        //실제 계정으로 토큰을 보내줌 .
+        emit Transfer(address(0), account, tokenId);
     }
 
     function burn(uint256 _tokenId) external {
@@ -235,6 +255,11 @@ contract CreateToken is ERC721, ERC165 {
     function kill() external onlyOwner {
         selfdestruct(owner);
     }
+
+    // //custom
+    // function alltoken() external view returns (*) {
+    //     return allTokens;
+    // }
 }
 
 contract ERC721TokenReceiver {

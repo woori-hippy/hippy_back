@@ -72,26 +72,24 @@ module.exports = {
       });
   },
 
-  createNFT: function (account, ipfsHash, callback) {
+  createNFT: async function (account, ipfsHash, callback) {
     const self = this;
 
-    // Bootstrap the MetaCoin abstraction for Use.
-    CreateToken.setProvider(self.web3.currentProvider);
+    try {
+      // Bootstrap the MetaCoin abstraction for Use.
+      //gas비 디폴트 값. 혹은 계정 연동
+      CreateToken.setProvider(self.web3.currentProvider);
+      CreateToken.web3.eth.defaultAccount = CreateToken.web3.eth.accounts[0];
 
-    let meta;
-    CreateToken.deployed()
-      .then(instance => {
-        meta = instance;
-        return meta.mint.call(account, ipfsHash);
-      })
-      .then(() => {
-        self.refreshBalance(account, answer => {
-          callback(answer);
-        });
-      })
-      .catch(e => {
-        console.log(e);
-        callback('ERROR 404');
-      });
+      const meta = await CreateToken.deployed();
+      console.log(meta);
+
+      const nft = await meta.mint(account, ipfsHash, { from: account, gas: 3000000 }); // gas limit 변경
+
+      callback(nft);
+    } catch (err) {
+      console.error(err);
+      callback(err);
+    }
   },
 };
