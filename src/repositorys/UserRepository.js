@@ -25,3 +25,19 @@ export const createByLocal = async data => {
     console.error(err);
   }
 };
+
+export const updateCoinAccount = async (id, coinAccount) => {
+  try {
+    return prisma.user.update({ where: { id }, data: { coinAccount } });
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const updateWooriAccount = async (id, wooriAccount) => {
+  try {
+    return prisma.user.update({ where: { id }, data: { wooriAccount } });
+  } catch (err) {
+    console.error(err);
+  }
+};
