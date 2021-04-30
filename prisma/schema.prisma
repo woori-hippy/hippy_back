@@ -1,0 +1,52 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model action {
+  id        Int      @id @default(autoincrement())
+  productId Int      @map("product_id")
+  userId    Int      @map("user_id")
+  price     Int
+  createdAt DateTime @default(now()) @map("created_at") @db.DateTime(0)
+  product   product  @relation(fields: [productId], references: [id])
+  user      user     @relation(fields: [userId], references: [id])
+
+  @@index([productId], name: "action_product_fk")
+  @@index([userId], name: "action_user_fk")
+}
+
+model product {
+  id        Int      @id @default(autoincrement())
+  tokenId   Int      @map("token_id")
+  userId    Int      @map("user_id")
+  price     Int
+  isSold    Boolean  @default(false) @map("is_sold")
+  isAcution Boolean  @default(false) @map("is_acution")
+  createdAt DateTime @default(now()) @map("created_at") @db.DateTime(0)
+  name      String   @db.VarChar(255)
+  src       String   @db.VarChar(255)
+  tag       String   @db.VarChar(255)
+  user      user     @relation(fields: [userId], references: [id])
+  action    action[]
+
+  @@index([userId], name: "product_user_fk")
+}
+
+model user {
+  id           Int       @id @default(autoincrement())
+  userId       String?   @unique @map("user_id") @db.VarChar(255)
+  password     String?   @db.VarChar(50)
+  name         String
+  isArtist     Boolean   @default(false) @map("is_artist")
+  provider     String    @db.VarChar(255)
+  email        String?   @db.VarChar(255)
+  coinAccount  String?   @map("coin_account")
+  wooriAccount String?   @map("woori_account")
+  action       action[]
+  product      product[]
+}

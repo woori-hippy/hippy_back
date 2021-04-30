@@ -6,6 +6,9 @@
     "start": "cross-env NODE_ENV=dev babel-node ./src/index.js",
     "dev": "cross-env NODE_ENV=dev nodemon",
     "build": "babel src -d dist",
+    "prisma:build": "npx prisma generate",
+    "prisma:migrate": "npx prisma migrate dev",
+    "prisma:update": "npx prisma db push --preview-feature && px prisma generate",
     "truffle:test": "truffle test test/*",
     "truffle:build": "truffle compile --all && truffle migrate --reset && truffle migrate --network development"
   },
@@ -32,10 +35,11 @@
     "prettier": "^2.0.4",
     "prisma": "^2.20.1",
     "truffle-contract": "^1.1.11",
-    "web3": "^0.20.0"
+    "web3": "^0.20.7"
   },
   "dependencies": {
     "@babel/runtime": "^7.13.10",
+    "@pinata/sdk": "^1.1.13",
     "@prisma/client": "^2.20.1",
     "babel-jest": "^24.9.0",
     "babel-register": "^6.26.0",
