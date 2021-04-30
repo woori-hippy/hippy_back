@@ -1,8 +1,5 @@
 const contract = require('truffle-contract');
-
-const metacoin_artifact = require('../../build/contracts/MetaCoin.json');
 const createToken_artifact = require('../../build/contracts/CreateToken.json');
-const MetaCoin = contract(metacoin_artifact);
 const CreateToken = contract(createToken_artifact);
 
 module.exports = {
@@ -74,12 +71,11 @@ module.exports = {
 
   createNFT: async function (account, ipfsHash, callback) {
     const self = this;
-
     try {
       // Bootstrap the MetaCoin abstraction for Use.
       //gas비 디폴트 값. 혹은 계정 연동
       CreateToken.setProvider(self.web3.currentProvider);
-      CreateToken.web3.eth.defaultAccount = CreateToken.web3.eth.accounts[0];
+      CreateToken.web3.eth.defaultAccount = account;
 
       const meta = await CreateToken.deployed();
       console.log(meta);
@@ -91,5 +87,29 @@ module.exports = {
       console.error(err);
       callback(err);
     }
+  },
+
+  findTokenList: async function (account) {
+    const self = this;
+
+    // Bootstrap the MetaCoin abstraction for Use.
+    CreateToken.setProvider(self.web3.currentProvider);
+    CreateToken.web3.eth.defaultAccount = account;
+
+    const meta = await CreateToken.deployed();
+    const totalSupply = await meta.totalSupply();
+    const list = [];
+    for (let j = 0; j < totalSupply; j++) {
+      const t = await meta.tokenByIndex(j);
+      const apr = await meta.getApproved(t);
+
+      if ((await meta.ownerOf(t)) === account) {
+        const ipfsHash = await meta.allTokens(t);
+        //console.log(asset);
+        list.push({ ipfsHash, tokenId: t, approved: apr });
+      }
+    }
+
+    return list;
   },
 };

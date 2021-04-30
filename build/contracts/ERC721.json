@@ -2813,7 +2813,11 @@
   },
   "networks": {},
   "schemaVersion": "3.4.0",
+<<<<<<< HEAD
   "updatedAt": "2021-04-30T11:48:47.430Z",
+=======
+  "updatedAt": "2021-04-30T11:31:20.077Z",
+>>>>>>> feature/mypage
   "devdoc": {
     "details": "See https://github.com/ethereum/EIPs/blob/master/EIPS/eip-721.md  Note: the ERC-165 identifier for this interface is 0x80ac58cd.",
     "methods": {
