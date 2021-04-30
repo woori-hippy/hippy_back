@@ -1,5 +1,6 @@
 import express from 'express';
 import * as NFTService from '../services/NFTService';
+
 const router = express.Router();
 
 router.get('/getAccounts', NFTService.getAccounts);
