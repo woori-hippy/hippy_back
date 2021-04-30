@@ -1,8 +1,5 @@
 const contract = require('truffle-contract');
-
-const metacoin_artifact = require('../../build/contracts/MetaCoin.json');
 const createToken_artifact = require('../../build/contracts/CreateToken.json');
-const MetaCoin = contract(metacoin_artifact);
 const CreateToken = contract(createToken_artifact);
 
 module.exports = {
@@ -72,26 +69,40 @@ module.exports = {
       });
   },
 
-  createNFT: function (account, ipfsHash, callback) {
+  createNFT: async function (account, ipfsHash, callback) {
     const self = this;
 
     // Bootstrap the MetaCoin abstraction for Use.
     CreateToken.setProvider(self.web3.currentProvider);
+    CreateToken.web3.eth.defaultAccount = account;
 
-    let meta;
-    CreateToken.deployed()
-      .then(instance => {
-        meta = instance;
-        return meta.mint.call(account, ipfsHash);
-      })
-      .then(() => {
-        self.refreshBalance(account, answer => {
-          callback(answer);
-        });
-      })
-      .catch(e => {
-        console.log(e);
-        callback('ERROR 404');
-      });
+    const meta = await CreateToken.deployed();
+    const nft = await meta.mint(account, ipfsHash, { from: account, gas: 3000000 });
+
+    callback(nft);
+  },
+
+  findTokenList: async function (account) {
+    const self = this;
+
+    // Bootstrap the MetaCoin abstraction for Use.
+    CreateToken.setProvider(self.web3.currentProvider);
+    CreateToken.web3.eth.defaultAccount = account;
+
+    const meta = await CreateToken.deployed();
+    const totalSupply = await meta.totalSupply();
+    const list = [];
+    for (let j = 0; j < totalSupply; j++) {
+      const t = await meta.tokenByIndex(j);
+      const apr = await meta.getApproved(t);
+
+      if ((await meta.ownerOf(t)) === account) {
+        const ipfsHash = await meta.allTokens(t);
+        //console.log(asset);
+        list.push({ ipfsHash, tokenId: t, approved: apr });
+      }
+    }
+
+    return list;
   },
 };

@@ -7,5 +7,6 @@ router.post('/getBalance', NFTService.getBalance);
 router.post('/transferNFT', NFTService.transferNFT);
 router.post('/createNFT', NFTService.createNFT);
 router.get('/getAllBalance', NFTService.getAllBalance);
+router.post('/findTokenList', NFTService.findTokenList);
 
 export default router;

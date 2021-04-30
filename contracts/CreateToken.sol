@@ -152,7 +152,7 @@ contract CreateToken is ERC721, ERC165 {
         allValidTokenIds.push(tokenId);
 
         //Token Metadata
-        tokenURIs[tokenId] = Strings.strConcat(baseTokenURI(), 'QmdDW36bvr2W6ua4FxnT8bKysXhYEUo7QbLTbkGW4Foxr8');
+        tokenURIs[tokenId] = Strings.strConcat(baseTokenURI(), ipfsHash);
 
         emit Transfer(address(0), _owner, tokenId);
     }

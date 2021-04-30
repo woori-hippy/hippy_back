@@ -51,3 +51,13 @@ export const createNFT = async (req, res) => {
     res.send(balance);
   });
 };
+
+export const findTokenList = async (req, res) => {
+  console.log('**** POST /findTokenList ****');
+  console.log(req.body);
+
+  const currentAccount = req.body.account;
+
+  const list = await truffle_connect.findTokenList(currentAccount);
+  return res.send(list);
+};

@@ -6,6 +6,7 @@
     "start": "cross-env NODE_ENV=dev babel-node ./src/index.js",
     "dev": "cross-env NODE_ENV=dev nodemon",
     "build": "babel src -d dist",
+    "prisma:build": "npx prisma generate",
     "truffle:test": "truffle test test/*",
     "truffle:build": "truffle compile --all && truffle migrate --reset && truffle migrate --network development"
   },
