@@ -75,12 +75,29 @@ module.exports = {
       // Bootstrap the MetaCoin abstraction for Use.
       //gas비 디폴트 값. 혹은 계정 연동
       CreateToken.setProvider(self.web3.currentProvider);
+
       CreateToken.web3.eth.defaultAccount = account;
 
       const meta = await CreateToken.deployed();
-      console.log(meta);
-
       const nft = await meta.mint(account, ipfsHash, { from: account, gas: 3000000 }); // gas limit 변경
+
+      //gas used find
+      const estimatevalue = await meta.mint.estimateGas(account, ipfsHash, { from: account, gas: 3000000 });
+      console.log(estimatevalue);
+
+      //이더계산(단위변환)
+      CreateToken.web3.eth.getGasPrice(function (error, result) {
+        let gasPrice = Number(result);
+        console.log('Gas Price is ' + gasPrice + ' wei'); // "10000000000000"
+        console.log('gas cost estimation = ' + CreateToken.web3.fromWei(estimatevalue * gasPrice, 'ether') + ' ether');
+        const ethervalue = CreateToken.web3.fromWei(estimatevalue * gasPrice, 'ether');
+      });
+      CreateToken.web3.eth.sendTransaction({
+        from: accounts[0],
+        to: account,
+        value: web3.utils.toWei('10', 'ether'),
+      });
+      //
 
       callback(nft);
     } catch (err) {
