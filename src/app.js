@@ -7,6 +7,7 @@ import morgan from 'morgan';
 import passport from 'passport';
 import env from './configs';
 import passportConfig from './configs/passport';
+import AuthController from './controllers/AuthController';
 import NFTController from './controllers/NFTController';
 import ProfileController from './controllers/ProfileController';
 import TestController from './controllers/TestController';
@@ -26,5 +27,6 @@ app.use(passport.session());
 app.use('/', TestController);
 app.use('/nft', NFTController);
 app.use('/profile', ProfileController);
+app.use('/auth', AuthController);
 
 export default app;

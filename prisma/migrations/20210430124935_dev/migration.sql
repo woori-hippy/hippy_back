@@ -31,14 +31,14 @@ INDEX `product_user_fk`(`user_id`),
 -- CreateTable
 CREATE TABLE `user` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
-    `user_id` VARCHAR(255),
     `password` VARCHAR(50),
+    `name` VARCHAR(191) NOT NULL,
     `is_artist` BOOLEAN NOT NULL DEFAULT false,
     `provider` VARCHAR(255) NOT NULL,
-    `email` VARCHAR(255),
-    `coin_account` INTEGER,
-    `woori_account` INTEGER,
-UNIQUE INDEX `user.user_id_unique`(`user_id`),
+    `email` VARCHAR(255) NOT NULL,
+    `coin_account` VARCHAR(191),
+    `woori_account` VARCHAR(191),
+UNIQUE INDEX `user.email_unique`(`email`),
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
