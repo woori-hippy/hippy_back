@@ -86,8 +86,8 @@ module.exports = {
       console.log(estimatevalue);
 
       //이더계산(단위변환)
-      CreateToken.web3.eth.getGasPrice(function (error, result) {
-        let gasPrice = Number(result);
+      CreateToken.web3.eth.getGasPrice((error, result) => {
+        const gasPrice = Number(result);
         console.log('Gas Price is ' + gasPrice + ' wei'); // "10000000000000"
         console.log('gas cost estimation = ' + CreateToken.web3.fromWei(estimatevalue * gasPrice, 'ether') + ' ether');
         const ethervalue = CreateToken.web3.fromWei(estimatevalue * gasPrice, 'ether');

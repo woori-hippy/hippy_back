@@ -39,12 +39,11 @@ model product {
 
 model user {
   id           Int       @id @default(autoincrement())
-  userId       String?   @unique @map("user_id") @db.VarChar(255)
-  password     String?   @db.VarChar(50)
+  password     String?   @db.VarChar(255)
   name         String
   isArtist     Boolean   @default(false) @map("is_artist")
   provider     String    @db.VarChar(255)
-  email        String?   @db.VarChar(255)
+  email        String    @unique @db.VarChar(255)
   coinAccount  String?   @map("coin_account")
   wooriAccount String?   @map("woori_account")
   action       action[]

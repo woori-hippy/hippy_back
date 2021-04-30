@@ -38,15 +38,15 @@
       "type": "function"
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.5.16+commit.9c3226ce\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"_operator\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_from\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_tokenId\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"_data\",\"type\":\"bytes\"}],\"name\":\"onERC721Received\",\"outputs\":[{\"internalType\":\"bytes4\",\"name\":\"\",\"type\":\"bytes4\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/inhyeokjo/Documents/WoriBankHack/hippy_back/contracts/CreateToken.sol\":\"ERC721TokenReceiver\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/inhyeokjo/Documents/WoriBankHack/hippy_back/contracts/Address.sol\":{\"keccak256\":\"0x6bd9ba4ec524114d3e0343424cc9f7724b47488d6af3eae0c15b47f819dc7af4\",\"urls\":[\"bzz-raw://c74e128c6b184df84cebb0cb86ee843e7930fd9a2017cfd956832dcd490f55b4\",\"dweb:/ipfs/Qmc2TVLJ3RFRm3QLFikoxdCcCqa3pmoiuyKW7oKvqsWaQf\"]},\"/Users/inhyeokjo/Documents/WoriBankHack/hippy_back/contracts/CreateToken.sol\":{\"keccak256\":\"0x6934f849395c953f60132dd8fd93b5371c5addb75860591cfa445f4e89fc50f9\",\"urls\":[\"bzz-raw://061767eefa208d0c10af1505cdb5c0af5045e7bf81f99ff52cb423fccf8687f5\",\"dweb:/ipfs/QmSQmm8nzogRF1cHTnGcfe3t5Ywq85g6XckmxZQHSnum5J\"]},\"/Users/inhyeokjo/Documents/WoriBankHack/hippy_back/contracts/ERC165.sol\":{\"keccak256\":\"0x714e1de6e2a04ce07865fe5e3eadfe1f00ef7e718269f7c703b05a8d009b4b1c\",\"urls\":[\"bzz-raw://7979cca62dca34c00c776852cd03b6c0dabc80b99e7e6c7fd0b8431c8943be43\",\"dweb:/ipfs/QmUvf6WFd2qXLUADuT9GtjeXMxuLpnH2nqkvgQkAkpkpM4\"]},\"/Users/inhyeokjo/Documents/WoriBankHack/hippy_back/contracts/ERC721.sol\":{\"keccak256\":\"0xb8fbb0de3d2b04c9ef17b046d9dae7059a9b621132ed87b085f736476a4da844\",\"urls\":[\"bzz-raw://c84a0a41293d0faf568aa9d08589c8874a2ebbdd25f2672939529059f8050629\",\"dweb:/ipfs/QmTB1GV8XMBQRyvZfT2tunjK2An6icmsjDBcY8wdDTX2uT\"]},\"/Users/inhyeokjo/Documents/WoriBankHack/hippy_back/contracts/SafeMath.sol\":{\"keccak256\":\"0xbdf685605d19992ae87b726eab98d39b6f80a203bc1cd0ee6809b16144367a6d\",\"urls\":[\"bzz-raw://fb43bb0dcc30c48b57dee0232cb39236252fa98cfe263435f8569478cccedc88\",\"dweb:/ipfs/QmdeCqgEv8DBdQpEv4SuiA2k3Kz7s5Qur4ToViWtMC4rJ3\"]},\"/Users/inhyeokjo/Documents/WoriBankHack/hippy_back/contracts/Strings.sol\":{\"keccak256\":\"0x049d7488fefa8497b1c07f80dc522227fc6a22a84d6c38e239027099dd9bc9c7\",\"urls\":[\"bzz-raw://303f3e69805ed317b536b19b722f4c86bf50f9915428de48facc9fbc595dea82\",\"dweb:/ipfs/Qmb2tzGLUekuLexTMcf5yFdx7Sx7prKtPX1uhbiGC8Ut4j\"]}},\"version\":1}",
+  "metadata": "{\"compiler\":{\"version\":\"0.5.16+commit.9c3226ce\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"_operator\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_from\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_tokenId\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"_data\",\"type\":\"bytes\"}],\"name\":\"onERC721Received\",\"outputs\":[{\"internalType\":\"bytes4\",\"name\":\"\",\"type\":\"bytes4\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/kimgeonhun/Study/NFT/hippy_back/contracts/CreateToken.sol\":\"ERC721TokenReceiver\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/kimgeonhun/Study/NFT/hippy_back/contracts/Address.sol\":{\"keccak256\":\"0x6bd9ba4ec524114d3e0343424cc9f7724b47488d6af3eae0c15b47f819dc7af4\",\"urls\":[\"bzz-raw://c74e128c6b184df84cebb0cb86ee843e7930fd9a2017cfd956832dcd490f55b4\",\"dweb:/ipfs/Qmc2TVLJ3RFRm3QLFikoxdCcCqa3pmoiuyKW7oKvqsWaQf\"]},\"/Users/kimgeonhun/Study/NFT/hippy_back/contracts/CreateToken.sol\":{\"keccak256\":\"0x6934f849395c953f60132dd8fd93b5371c5addb75860591cfa445f4e89fc50f9\",\"urls\":[\"bzz-raw://061767eefa208d0c10af1505cdb5c0af5045e7bf81f99ff52cb423fccf8687f5\",\"dweb:/ipfs/QmSQmm8nzogRF1cHTnGcfe3t5Ywq85g6XckmxZQHSnum5J\"]},\"/Users/kimgeonhun/Study/NFT/hippy_back/contracts/ERC165.sol\":{\"keccak256\":\"0x714e1de6e2a04ce07865fe5e3eadfe1f00ef7e718269f7c703b05a8d009b4b1c\",\"urls\":[\"bzz-raw://7979cca62dca34c00c776852cd03b6c0dabc80b99e7e6c7fd0b8431c8943be43\",\"dweb:/ipfs/QmUvf6WFd2qXLUADuT9GtjeXMxuLpnH2nqkvgQkAkpkpM4\"]},\"/Users/kimgeonhun/Study/NFT/hippy_back/contracts/ERC721.sol\":{\"keccak256\":\"0xb8fbb0de3d2b04c9ef17b046d9dae7059a9b621132ed87b085f736476a4da844\",\"urls\":[\"bzz-raw://c84a0a41293d0faf568aa9d08589c8874a2ebbdd25f2672939529059f8050629\",\"dweb:/ipfs/QmTB1GV8XMBQRyvZfT2tunjK2An6icmsjDBcY8wdDTX2uT\"]},\"/Users/kimgeonhun/Study/NFT/hippy_back/contracts/SafeMath.sol\":{\"keccak256\":\"0xbdf685605d19992ae87b726eab98d39b6f80a203bc1cd0ee6809b16144367a6d\",\"urls\":[\"bzz-raw://fb43bb0dcc30c48b57dee0232cb39236252fa98cfe263435f8569478cccedc88\",\"dweb:/ipfs/QmdeCqgEv8DBdQpEv4SuiA2k3Kz7s5Qur4ToViWtMC4rJ3\"]},\"/Users/kimgeonhun/Study/NFT/hippy_back/contracts/Strings.sol\":{\"keccak256\":\"0x049d7488fefa8497b1c07f80dc522227fc6a22a84d6c38e239027099dd9bc9c7\",\"urls\":[\"bzz-raw://303f3e69805ed317b536b19b722f4c86bf50f9915428de48facc9fbc595dea82\",\"dweb:/ipfs/Qmb2tzGLUekuLexTMcf5yFdx7Sx7prKtPX1uhbiGC8Ut4j\"]}},\"version\":1}",
   "bytecode": "0x",
   "deployedBytecode": "0x",
   "sourceMap": "",
   "deployedSourceMap": "",
   "source": "pragma solidity ^0.5.0;\n\nimport './ERC721.sol';\nimport './ERC165.sol';\nimport './SafeMath.sol';\nimport './Address.sol';\nimport './Strings.sol';\n\ncontract CreateToken is ERC721, ERC165 {\n    using SafeMath for uint256;\n    using Address for address;\n\n    address payable public owner;\n    mapping(bytes4 => bool) supportedInterfaces;\n\n    mapping(uint256 => address) tokenOwners; //소유자 정보를 담는 데이터\n    mapping(address => uint256) balances; //특정 소유계정이 가진 토큰의 수\n    mapping(uint256 => address) allowance; //어떤 토큰 아이디를 어떤 계정이 소유권을 이전 할 수 있는 권한을 갖고 있는가\n    //제3자가 승인을할 수 있게 함.\n    mapping(address => mapping(address => bool)) operators; //어떤 소유자 계정이 중계 계정, 앞 address -> 소유자\n    //2번쨰 address -> 중계인 계정\n\n    mapping(uint256 => string) tokenURIs;\n\n    struct asset {\n        string ipfsHash;\n    }\n\n    //asset[] 이미지 조합 , hash 값들이 들어가 있음.\n    asset[] public allTokens;\n\n    //for enumeration\n    uint256[] public allValidTokenIds; //유효한 토큰 id만 갖고 있는 배열\n    mapping(uint256 => uint256) private allValidTokenIndex;\n    //토큰 id만 가지고 인데스를 반환\n\n    modifier onlyOwner {\n        require(msg.sender == owner, 'Only owner can call this function.');\n        _;\n    }\n\n    constructor() public {\n        owner = msg.sender;\n        supportedInterfaces[0x01ffc9a7] = true; //ERC165\n        supportedInterfaces[0x80ac58cd] = true; //ERC721\n        supportedInterfaces[0x5b5e139f] = true; //ERC721Metadata\n    }\n\n    //ERC 165 구현\n    function supportsInterface(bytes4 interfaceID) external view returns (bool) {\n        return supportedInterfaces[interfaceID];\n    }\n\n    //토큰 소유 계정을 key로 해서 값을 리턴 총 토큰 수\n    function balanceOf(address _owner) external view returns (uint256) {\n        require(_owner != address(0));\n        return balances[_owner];\n    }\n\n    //토큰 id를 받아서 토큰 id 를 토큰 Owner에 넣어서 리턴.\n    function ownerOf(uint256 _tokenId) public view returns (address) {\n        address addr_owner = tokenOwners[_tokenId];\n        require(addr_owner != address(0), 'Token is invalid'); //소유자가 0이라면 예외처리\n        return addr_owner;\n    }\n\n    function transferFrom(\n        address _from,\n        address _to,\n        uint256 _tokenId\n    ) public payable {\n        address addr_owner = ownerOf(_tokenId);\n\n        //토큰 계정이랑 from 계정이 일치하는지 확인.\n        require(addr_owner == _from, '_from is NOT the owner of the token');\n        //to 계정은 null이면 안됨\n        require(_to != address(0), 'Transfer _to address 0x0');\n\n        //allowance 게정도 가능. transferfrom 함수를호출 가능 , 즉 alloowance 계정인지.\n        address addr_allowed = allowance[_tokenId];\n        bool isOp = operators[addr_owner][msg.sender]; //operators(중계인 계정들)이 msg.sender에게 승인을 했는지?\n\n        require(addr_owner == msg.sender || addr_allowed == msg.sender || isOp, 'msg.sender does not have transferable token');\n        //위 조건들이 반영되면 시작.\n        // 토큰주인을 _to 계정으로 변경.\n        //밸런스(_프롬)[토큰 수 -1]\n        //밸런스(_to)[토큰수 + 1]\n        tokenOwners[_tokenId] = _to;\n        balances[_from] = balances[_from].sub(1);\n        balances[_to] = balances[_to].add(1);\n\n        //소유계정이 바꼈기 때문에 delete를 해준다.\n        if (allowance[_tokenId] != address(0)) {\n            delete allowance[_tokenId];\n        }\n\n        emit Transfer(_from, _to, _tokenId);\n    }\n\n    function safeTransferFrom(\n        address _from,\n        address _to,\n        uint256 _tokenId,\n        bytes memory data\n    ) public payable {\n        transferFrom(_from, _to, _tokenId);\n\n        //check if _to is CA\n        if (_to.isContract()) {\n            bytes4 result = ERC721TokenReceiver(_to).onERC721Received(msg.sender, _from, _tokenId, data);\n\n            require(result == bytes4(keccak256('onERC721Received(address,address,uint256,bytes)')), 'receipt of token is NOT completed');\n        }\n    }\n\n    function safeTransferFrom(\n        address _from,\n        address _to,\n        uint256 _tokenId\n    ) public payable {\n        safeTransferFrom(_from, _to, _tokenId, '');\n    }\n\n    // 소유권 이전?\n    function approve(address _approved, uint256 _tokenId) external payable {\n        address addr_owner = ownerOf(_tokenId);\n        bool isOp = operators[addr_owner][msg.sender];\n\n        require(addr_owner == msg.sender || isOp, 'Not approved by owner');\n\n        allowance[_tokenId] = _approved;\n\n        emit Approval(addr_owner, _approved, _tokenId);\n    }\n\n    function setApprovalForAll(address _operator, bool _approved) external {\n        operators[msg.sender][_operator] = _approved;\n        emit ApprovalForAll(msg.sender, _operator, _approved);\n    }\n\n    function getApproved(uint256 _tokenId) external view returns (address) {\n        return allowance[_tokenId];\n    }\n\n    function isApprovedForAll(address _owner, address _operator) external view returns (bool) {\n        return operators[_owner][_operator];\n    }\n\n    //\n\n    //non-ERC721 standard\n    //\n    //\n\n    function mint(address account, string calldata ipfsHash) external payable returns (uint256) {\n        asset memory newAsset = asset(ipfsHash);\n\n        //allTokens.push(newAsset) - 1; 이거를 토큰 id로 하기로 했음.\n\n        uint256 tokenId = allTokens.push(newAsset) - 1;\n        //token id starts from 0, index of assets array\n\n        //아 토큰 id로 토큰오너스 라느 곳에 account에 보내줌.\n        tokenOwners[tokenId] = account;\n        balances[account] = balances[account].add(1);\n\n        //for enumeration\n        //인덱스를 저장 함. 유효한 토큰만 저장함.\n        allValidTokenIndex[tokenId] = allValidTokenIds.length;\n        //index starts from 0\n        allValidTokenIds.push(tokenId);\n\n        //Token Metadata\n        tokenURIs[tokenId] = Strings.strConcat(baseTokenURI(), ipfsHash);\n\n        //실제 계정으로 토큰을 보내줌 .\n        emit Transfer(address(0), account, tokenId);\n    }\n\n    function burn(uint256 _tokenId) external {\n        address addr_owner = ownerOf(_tokenId);\n\n        require(addr_owner == msg.sender, 'msg.sender is NOT the owner of the token');\n\n        //reset approved address\n        if (allowance[_tokenId] != address(0)) {\n            delete allowance[_tokenId];\n            // tokenId => 0\n        }\n\n        //transfer : change the owner of the token, but address(0)\n        tokenOwners[_tokenId] = address(0);\n        balances[msg.sender] = balances[msg.sender].sub(1);\n\n        //for enumeration\n        removeInvalidToken(_tokenId);\n\n        //clear metadata if exists\n        if (bytes(tokenURIs[_tokenId]).length != 0) {\n            delete tokenURIs[_tokenId];\n        }\n\n        emit Transfer(addr_owner, address(0), _tokenId);\n    }\n\n    function removeInvalidToken(uint256 tokenIdToRemove) private {\n        uint256 lastIndex = allValidTokenIds.length.sub(1);\n        uint256 removeIndex = allValidTokenIndex[tokenIdToRemove];\n\n        uint256 lastTokenId = allValidTokenIds[lastIndex];\n\n        //swap\n        allValidTokenIds[removeIndex] = lastTokenId;\n        allValidTokenIndex[lastTokenId] = removeIndex;\n\n        //delete\n        //Arrays have a length member to hold their number of elements.\n        //Dynamic arrays can be resized in storage (not in memory) by changing the .length member.\n        allValidTokenIds.length = allValidTokenIds.length.sub(1);\n        //allValidTokenIndex is private so can't access invalid token by index programmatically\n        allValidTokenIndex[tokenIdToRemove] = 0;\n    }\n\n    function baseTokenURI() public pure returns (string memory) {\n        return 'https://gateway.ipfs.io/ipfs/';\n    }\n\n    //ERC721Enumerable\n    function totalSupply() public view returns (uint256) {\n        return allValidTokenIds.length;\n    }\n\n    //ERC721Enumerable\n    function tokenByIndex(uint256 index) public view returns (uint256) {\n        require(index < totalSupply());\n        return allValidTokenIds[index];\n    }\n\n    //ERC721Metadata\n    function name() external pure returns (string memory) {\n        return 'IPFS TOKEN';\n    }\n\n    //ERC721Metadata\n    function symbol() external pure returns (string memory) {\n        return 'IPT';\n    }\n\n    //ERC721Metadata\n    function tokenURI(uint256 _tokenId) external view returns (string memory) {\n        require(tokenByIndex(allValidTokenIndex[_tokenId]) == _tokenId, 'The token is invalid');\n        return tokenURIs[_tokenId];\n    }\n\n    function kill() external onlyOwner {\n        selfdestruct(owner);\n    }\n\n    // //custom\n    // function alltoken() external view returns (*) {\n    //     return allTokens;\n    // }\n}\n\ncontract ERC721TokenReceiver {\n    function onERC721Received(\n        address _operator,\n        address _from,\n        uint256 _tokenId,\n        bytes memory _data\n    ) public returns (bytes4);\n}\n",
-  "sourcePath": "/Users/inhyeokjo/Documents/WoriBankHack/hippy_back/contracts/CreateToken.sol",
+  "sourcePath": "/Users/kimgeonhun/Study/NFT/hippy_back/contracts/CreateToken.sol",
   "ast": {
-    "absolutePath": "/Users/inhyeokjo/Documents/WoriBankHack/hippy_back/contracts/CreateToken.sol",
+    "absolutePath": "/Users/kimgeonhun/Study/NFT/hippy_back/contracts/CreateToken.sol",
     "exportedSymbols": {
       "CreateToken": [
         779
@@ -70,7 +70,7 @@
         "src": "0:23:2"
       },
       {
-        "absolutePath": "/Users/inhyeokjo/Documents/WoriBankHack/hippy_back/contracts/ERC721.sol",
+        "absolutePath": "/Users/kimgeonhun/Study/NFT/hippy_back/contracts/ERC721.sol",
         "file": "./ERC721.sol",
         "id": 61,
         "nodeType": "ImportDirective",
@@ -81,7 +81,7 @@
         "unitAlias": ""
       },
       {
-        "absolutePath": "/Users/inhyeokjo/Documents/WoriBankHack/hippy_back/contracts/ERC165.sol",
+        "absolutePath": "/Users/kimgeonhun/Study/NFT/hippy_back/contracts/ERC165.sol",
         "file": "./ERC165.sol",
         "id": 62,
         "nodeType": "ImportDirective",
@@ -92,7 +92,7 @@
         "unitAlias": ""
       },
       {
-        "absolutePath": "/Users/inhyeokjo/Documents/WoriBankHack/hippy_back/contracts/SafeMath.sol",
+        "absolutePath": "/Users/kimgeonhun/Study/NFT/hippy_back/contracts/SafeMath.sol",
         "file": "./SafeMath.sol",
         "id": 63,
         "nodeType": "ImportDirective",
@@ -103,7 +103,7 @@
         "unitAlias": ""
       },
       {
-        "absolutePath": "/Users/inhyeokjo/Documents/WoriBankHack/hippy_back/contracts/Address.sol",
+        "absolutePath": "/Users/kimgeonhun/Study/NFT/hippy_back/contracts/Address.sol",
         "file": "./Address.sol",
         "id": 64,
         "nodeType": "ImportDirective",
@@ -114,7 +114,7 @@
         "unitAlias": ""
       },
       {
-        "absolutePath": "/Users/inhyeokjo/Documents/WoriBankHack/hippy_back/contracts/Strings.sol",
+        "absolutePath": "/Users/kimgeonhun/Study/NFT/hippy_back/contracts/Strings.sol",
         "file": "./Strings.sol",
         "id": 65,
         "nodeType": "ImportDirective",
@@ -9718,7 +9718,7 @@
   },
   "legacyAST": {
     "attributes": {
-      "absolutePath": "/Users/inhyeokjo/Documents/WoriBankHack/hippy_back/contracts/CreateToken.sol",
+      "absolutePath": "/Users/kimgeonhun/Study/NFT/hippy_back/contracts/CreateToken.sol",
       "exportedSymbols": {
         "CreateToken": [
           779
@@ -9745,7 +9745,7 @@
       {
         "attributes": {
           "SourceUnit": 904,
-          "absolutePath": "/Users/inhyeokjo/Documents/WoriBankHack/hippy_back/contracts/ERC721.sol",
+          "absolutePath": "/Users/kimgeonhun/Study/NFT/hippy_back/contracts/ERC721.sol",
           "file": "./ERC721.sol",
           "scope": 794,
           "symbolAliases": [
@@ -9760,7 +9760,7 @@
       {
         "attributes": {
           "SourceUnit": 804,
-          "absolutePath": "/Users/inhyeokjo/Documents/WoriBankHack/hippy_back/contracts/ERC165.sol",
+          "absolutePath": "/Users/kimgeonhun/Study/NFT/hippy_back/contracts/ERC165.sol",
           "file": "./ERC165.sol",
           "scope": 794,
           "symbolAliases": [
@@ -9775,7 +9775,7 @@
       {
         "attributes": {
           "SourceUnit": 1242,
-          "absolutePath": "/Users/inhyeokjo/Documents/WoriBankHack/hippy_back/contracts/SafeMath.sol",
+          "absolutePath": "/Users/kimgeonhun/Study/NFT/hippy_back/contracts/SafeMath.sol",
           "file": "./SafeMath.sol",
           "scope": 794,
           "symbolAliases": [
@@ -9790,7 +9790,7 @@
       {
         "attributes": {
           "SourceUnit": 42,
-          "absolutePath": "/Users/inhyeokjo/Documents/WoriBankHack/hippy_back/contracts/Address.sol",
+          "absolutePath": "/Users/kimgeonhun/Study/NFT/hippy_back/contracts/Address.sol",
           "file": "./Address.sol",
           "scope": 794,
           "symbolAliases": [
@@ -9805,7 +9805,7 @@
       {
         "attributes": {
           "SourceUnit": 1565,
-          "absolutePath": "/Users/inhyeokjo/Documents/WoriBankHack/hippy_back/contracts/Strings.sol",
+          "absolutePath": "/Users/kimgeonhun/Study/NFT/hippy_back/contracts/Strings.sol",
           "file": "./Strings.sol",
           "scope": 794,
           "symbolAliases": [
@@ -20179,7 +20179,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.0",
-  "updatedAt": "2021-04-30T17:41:18.186Z",
+  "updatedAt": "2021-04-30T18:14:59.156Z",
   "devdoc": {
     "methods": {}
   },

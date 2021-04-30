@@ -1,15 +1,15 @@
 {
   "contractName": "Strings",
   "abi": [],
-  "metadata": "{\"compiler\":{\"version\":\"0.5.16+commit.9c3226ce\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/inhyeokjo/Documents/WoriBankHack/hippy_back/contracts/Strings.sol\":\"Strings\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/inhyeokjo/Documents/WoriBankHack/hippy_back/contracts/Strings.sol\":{\"keccak256\":\"0x049d7488fefa8497b1c07f80dc522227fc6a22a84d6c38e239027099dd9bc9c7\",\"urls\":[\"bzz-raw://303f3e69805ed317b536b19b722f4c86bf50f9915428de48facc9fbc595dea82\",\"dweb:/ipfs/Qmb2tzGLUekuLexTMcf5yFdx7Sx7prKtPX1uhbiGC8Ut4j\"]}},\"version\":1}",
-  "bytecode": "0x60556023600b82828239805160001a607314601657fe5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea265627a7a7231582021dbe4e77e02be07f405e20615ec7587212289647c42394ae54d0442a0d9d95c64736f6c63430005100032",
-  "deployedBytecode": "0x73000000000000000000000000000000000000000030146080604052600080fdfea265627a7a7231582021dbe4e77e02be07f405e20615ec7587212289647c42394ae54d0442a0d9d95c64736f6c63430005100032",
+  "metadata": "{\"compiler\":{\"version\":\"0.5.16+commit.9c3226ce\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/kimgeonhun/Study/NFT/hippy_back/contracts/Strings.sol\":\"Strings\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/kimgeonhun/Study/NFT/hippy_back/contracts/Strings.sol\":{\"keccak256\":\"0x049d7488fefa8497b1c07f80dc522227fc6a22a84d6c38e239027099dd9bc9c7\",\"urls\":[\"bzz-raw://303f3e69805ed317b536b19b722f4c86bf50f9915428de48facc9fbc595dea82\",\"dweb:/ipfs/Qmb2tzGLUekuLexTMcf5yFdx7Sx7prKtPX1uhbiGC8Ut4j\"]}},\"version\":1}",
+  "bytecode": "0x60556023600b82828239805160001a607314601657fe5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea265627a7a72315820fa0669725a7699df6eeaaddad20d9fb2f1b7b9c6d1d43ae42296cc27d916720164736f6c63430005100032",
+  "deployedBytecode": "0x73000000000000000000000000000000000000000030146080604052600080fdfea265627a7a72315820fa0669725a7699df6eeaaddad20d9fb2f1b7b9c6d1d43ae42296cc27d916720164736f6c63430005100032",
   "sourceMap": "27:2023:9:-;;132:2:-1;166:7;155:9;146:7;137:37;255:7;249:14;246:1;241:23;235:4;232:33;222:2;;269:9;222:2;293:9;290:1;283:20;323:4;314:7;306:22;347:7;338;331:24",
   "deployedSourceMap": "27:2023:9:-;;;;;;;;",
   "source": "pragma solidity ^0.5.0;\r\n\r\nlibrary Strings {\r\n    // via https://github.com/oraclize/ethereum-api/blob/master/oraclizeAPI_0.5.sol\r\n    function strConcat(string memory _a, string memory _b, string memory _c, string memory _d, string memory _e) internal pure returns (string memory) {\r\n        bytes memory _ba = bytes(_a);\r\n        bytes memory _bb = bytes(_b);\r\n        bytes memory _bc = bytes(_c);\r\n        bytes memory _bd = bytes(_d);\r\n        bytes memory _be = bytes(_e);\r\n        string memory abcde = new string(_ba.length + _bb.length + _bc.length + _bd.length + _be.length);\r\n        bytes memory babcde = bytes(abcde);\r\n        uint k = 0;\r\n        for (uint i = 0; i < _ba.length; i++) babcde[k++] = _ba[i];\r\n        for (uint i = 0; i < _bb.length; i++) babcde[k++] = _bb[i];\r\n        for (uint i = 0; i < _bc.length; i++) babcde[k++] = _bc[i];\r\n        for (uint i = 0; i < _bd.length; i++) babcde[k++] = _bd[i];\r\n        for (uint i = 0; i < _be.length; i++) babcde[k++] = _be[i];\r\n        return string(babcde);\r\n    }\r\n\r\n    function strConcat(string memory _a, string memory _b, string memory _c, string memory _d) internal pure returns (string memory) {\r\n        return strConcat(_a, _b, _c, _d, \"\");\r\n    }\r\n\r\n    function strConcat(string memory _a, string memory _b, string memory _c) internal pure returns (string memory) {\r\n        return strConcat(_a, _b, _c, \"\", \"\");\r\n    }\r\n\r\n    function strConcat(string memory _a, string memory _b) internal pure returns (string memory) {\r\n        return strConcat(_a, _b, \"\", \"\", \"\");\r\n    }\r\n\r\n    function uint2str(uint _i) internal pure returns (string memory _uintAsString) {\r\n        if (_i == 0) {\r\n            return \"0\";\r\n        }\r\n        uint j = _i;\r\n        uint len;\r\n        while (j != 0) {\r\n            len++;\r\n            j /= 10;\r\n        }\r\n        bytes memory bstr = new bytes(len);\r\n        uint k = len - 1;\r\n        while (_i != 0) {\r\n            bstr[k--] = byte(uint8(48 + _i % 10));\r\n            _i /= 10;\r\n        }\r\n        return string(bstr);\r\n    }\r\n}\r\n",
-  "sourcePath": "/Users/inhyeokjo/Documents/WoriBankHack/hippy_back/contracts/Strings.sol",
+  "sourcePath": "/Users/kimgeonhun/Study/NFT/hippy_back/contracts/Strings.sol",
   "ast": {
-    "absolutePath": "/Users/inhyeokjo/Documents/WoriBankHack/hippy_back/contracts/Strings.sol",
+    "absolutePath": "/Users/kimgeonhun/Study/NFT/hippy_back/contracts/Strings.sol",
     "exportedSymbols": {
       "Strings": [
         1564
@@ -4358,7 +4358,7 @@
   },
   "legacyAST": {
     "attributes": {
-      "absolutePath": "/Users/inhyeokjo/Documents/WoriBankHack/hippy_back/contracts/Strings.sol",
+      "absolutePath": "/Users/kimgeonhun/Study/NFT/hippy_back/contracts/Strings.sol",
       "exportedSymbols": {
         "Strings": [
           1564
@@ -8980,7 +8980,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.0",
-  "updatedAt": "2021-04-30T17:41:18.196Z",
+  "updatedAt": "2021-04-30T18:14:59.165Z",
   "devdoc": {
     "methods": {}
   },
