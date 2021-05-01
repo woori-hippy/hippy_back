@@ -12,6 +12,7 @@ import NFTController from './controllers/NFTController';
 import ProductController from './controllers/ProductController';
 import ProfileController from './controllers/ProfileController';
 import TestController from './controllers/TestController';
+import WooriController from './controllers/WooriController';
 
 const app = express();
 passportConfig(passport);
@@ -30,4 +31,6 @@ app.use('/nft', NFTController);
 app.use('/profile', ProfileController);
 app.use('/auth', AuthController);
 app.use('/product', ProductController);
+app.use('/woori', WooriController);
+
 export default app;
