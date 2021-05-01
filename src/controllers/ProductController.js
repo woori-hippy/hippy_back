@@ -3,6 +3,8 @@ import * as AuthHelper from '../middlewares/AuthHelper';
 import * as ProductService from '../services/ProductService';
 const router = express.Router();
 
-router.post('/', AuthHelper.isLoggedIn, AuthHelper.isArtist, ProductService.register);
+router.post('/', AuthHelper.isLoggedIn, ProductService.register);
+router.get('/', AuthHelper.isLoggedIn, ProductService.findAll);
+router.get('/:id', AuthHelper.isLoggedIn, ProductService.findById);
 
 export default router;

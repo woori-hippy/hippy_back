@@ -14,3 +14,29 @@ export const register = async (req, res) => {
     console.error(err);
   }
 };
+
+export const findAll = async (req, res) => {
+  try {
+    const productInfo = await ProductRepository.findAll();
+    if (productInfo) {
+      res.send(productInfo);
+    } else {
+      throw new Error('알 수 없는 에러 발생');
+    }
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const findById = async (req, res) => {
+  try {
+    const productInfo = await ProductRepository.findById(Number(req.params.id));
+    if (productInfo) {
+      res.send(productInfo);
+    } else {
+      throw new Error('알 수 없는 에러 발생');
+    }
+  } catch (err) {
+    console.error(err);
+  }
+};
