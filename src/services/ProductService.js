@@ -23,8 +23,8 @@ export const buy = async (req, res) => {
   try {
     console.log(req.user);
 
-    const ProductInfo = await ProductRepository.findById(Number(req.body.ProductId));
-    const { price, isSold, tokenId, userId } = ProductInfo;
+    const ProductInfo = await ProductRepository.findById(Number(req.body.productId));
+    const { price, tokenId, userId } = ProductInfo;
 
     const userInfo = await UserRepository.findById(userId);
     const response = await axios({
@@ -54,15 +54,15 @@ export const buy = async (req, res) => {
         token: req.user.wooriToken,
       },
     });
-    if (response.status == 200) {
+    if (response.status === 200) {
       const estimatevalue = await truffleConnect.estimateGasTransferNFT(userInfo.coinAccount, req.user.coinAccount, tokenId);
-      const send = await truffleConnect.sendETH(userInfo.coinAccount, estimatevalue);
-      const NFT = await truffleConnect.transferNFT(userInfo.coinAccount, req.user.coinAccount, tokenId);
+      await truffleConnect.sendETH(userInfo.coinAccount, estimatevalue);
+      await truffleConnect.transferNFT(userInfo.coinAccount, req.user.coinAccount, tokenId);
 
       await ProductRepository.updateProductState(ProductInfo.id, true);
       const rate = (price / 100) * 98;
 
-      const response = await axios({
+      await axios({
         method: 'post',
         url: 'https://openapi.wooribank.com:444/oai/wb/v1/trans/executeWooriAcctToWooriAcct',
         data: {
@@ -101,11 +101,14 @@ export const buy = async (req, res) => {
 export const findAll = async (req, res) => {
   try {
     const productInfo = await ProductRepository.findAll();
-    if (productInfo) {
-      res.send(productInfo);
-    } else {
-      throw new Error('알 수 없는 에러 발생');
+    const productList = [];
+    for await (const product of productInfo) {
+      const ipfs = await truffleConnect.findToken(product.tokenId);
+      product.ipfsHash = ipfs.ipfsHash;
+      productList.push(product);
     }
+
+    res.send(productList);
   } catch (err) {
     console.error(err);
   }
@@ -115,6 +118,8 @@ export const findById = async (req, res) => {
   try {
     const productInfo = await ProductRepository.findById(Number(req.params.id));
     if (productInfo) {
+      const ipfs = await truffleConnect.findToken(productInfo.tokenId);
+      productInfo.ipfsHash = ipfs.ipfsHash;
       res.send(productInfo);
     } else {
       throw new Error('알 수 없는 에러 발생');

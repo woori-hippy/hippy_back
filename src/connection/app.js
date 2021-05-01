@@ -157,4 +157,19 @@ module.exports = {
 
     return list;
   },
+
+  findToken: async function (tokenId) {
+    const self = this;
+
+    // Bootstrap the MetaCoin abstraction for Use.
+    CreateToken.setProvider(self.web3.currentProvider);
+
+    const meta = await CreateToken.deployed();
+
+    const apr = await meta.getApproved(tokenId);
+
+    const ipfsHash = await meta.allTokens(tokenId);
+
+    return { ipfsHash, tokenId: tokenId, approved: apr };
+  },
 };
