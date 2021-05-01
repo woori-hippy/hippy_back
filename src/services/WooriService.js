@@ -21,7 +21,7 @@ export const allAcount = async (req, res) => {
         dataBody: {},
       },
       headers: {
-        appkey: env.APIKEY,
+        appkey: env.APPKEY,
         token: req.user.wooriToken,
       },
     });
@@ -59,7 +59,7 @@ export const wooriToken = async (req, res) => {
         },
       },
       headers: {
-        appkey: env.APIKEY,
+        appkey: env.APPKEY,
       },
     });
     res.send(response);
@@ -94,7 +94,7 @@ export const phone = async (req, res) => {
         },
       },
       headers: {
-        appkey: env.APIKEY,
+        appkey: env.APPKEY,
       },
     });
     res.send(response);
