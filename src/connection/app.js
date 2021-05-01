@@ -2,6 +2,21 @@ const contract = require('truffle-contract');
 const createToken_artifact = require('../../build/contracts/CreateToken.json');
 const CreateToken = contract(createToken_artifact);
 
+const sendEth = async (CreateToken, estimatevalue, from, to) => {
+  //이더계산(단위변환)
+  const getGasPrice = promisify(CreateToken.web3.eth.getGasPrice);
+  const ethervalue = await getGasPrice();
+
+  const gasPrice = Number(ethervalue);
+  const etherValue = CreateToken.web3.fromWei(estimatevalue * gasPrice, 'ether');
+
+  await CreateToken.web3.eth.sendTransaction({
+    from,
+    to,
+    value: CreateToken.web3.toWei(etherValue, 'ether'),
+  });
+};
+
 module.exports = {
   start: function (callback) {
     const self = this;
@@ -46,27 +61,45 @@ module.exports = {
         callback('Error 404');
       });
   },
-  transferNFT: function (sender, receiver, tokenId, callback) {
+
+  estimateGasTransferNFT: async function (sender, receiver, tokenId) {
+    try {
+      const self = this;
+
+      CreateToken.setProvider(self.web3.currentProvider);
+      CreateToken.web3.eth.defaultAccount = sender;
+      const meta = await CreateToken.deployed();
+
+      return meta.safeTransferFrom.estimateGas(sender, receiver, Number(tokenId), { from: sender, gas: 3000000 });
+    } catch (err) {
+      console.error(err);
+    }
+  },
+
+  transferNFT: async function (sender, receiver, tokenId) {
     const self = this;
 
     // Bootstrap the MetaCoin abstraction for Use.
     CreateToken.setProvider(self.web3.currentProvider);
+    CreateToken.web3.eth.defaultAccount = sender;
+    const meta = await CreateToken.deployed();
 
-    let meta;
-    CreateToken.deployed()
-      .then(instance => {
-        meta = instance;
-        return meta.safeTransferFrom(sender, receiver, tokenId);
-      })
-      .then(() => {
-        self.refreshBalance(sender, answer => {
-          callback(answer);
-        });
-      })
-      .catch(e => {
-        console.log(e);
-        callback('ERROR 404');
-      });
+    const estimatevalue = await meta.safeTransferFrom.estimateGas(sender, receiver, tokenId, { from: sender, gas: 3000000 });
+    await sendEth(CreateToken, estimatevalue, sender, receiver);
+
+    await meta.safeTransferFrom(sender, receiver, tokenId);
+    const refreshBalance = await meta.safeTransferFrom(sender);
+
+    return refreshBalance;
+  },
+
+  estimateGasCreateNFT: async function (account, ipfsHash) {
+    const self = this;
+    CreateToken.setProvider(self.web3.currentProvider);
+    CreateToken.web3.eth.defaultAccount = account;
+    const meta = await CreateToken.deployed();
+
+    return meta.mint.estimateGas(account, ipfsHash, { from: account, gas: 3000000 });
   },
 
   createNFT: async function (account, ipfsHash, callback) {
@@ -75,29 +108,30 @@ module.exports = {
       // Bootstrap the MetaCoin abstraction for Use.
       //gas비 디폴트 값. 혹은 계정 연동
       CreateToken.setProvider(self.web3.currentProvider);
-
       CreateToken.web3.eth.defaultAccount = account;
 
       const meta = await CreateToken.deployed();
-      const nft = await meta.mint(account, ipfsHash, { from: account, gas: 3000000 }); // gas limit 변경
 
       //gas used find
       const estimatevalue = await meta.mint.estimateGas(account, ipfsHash, { from: account, gas: 3000000 });
-      console.log(estimatevalue);
 
-      //이더계산(단위변환)
-      CreateToken.web3.eth.getGasPrice((error, result) => {
-        const gasPrice = Number(result);
-        console.log('Gas Price is ' + gasPrice + ' wei'); // "10000000000000"
-        console.log('gas cost estimation = ' + CreateToken.web3.fromWei(estimatevalue * gasPrice, 'ether') + ' ether');
-        const ethervalue = CreateToken.web3.fromWei(estimatevalue * gasPrice, 'ether');
-      });
-      CreateToken.web3.eth.sendTransaction({
-        from: accounts[0],
+      const getGasPrice = promisify(CreateToken.web3.eth.getGasPrice);
+      const ethervalue = await getGasPrice();
+
+      const gasPrice = Number(ethervalue);
+      const etherValue = CreateToken.web3.fromWei(estimatevalue * gasPrice, 'ether');
+
+      //gas mainaddress  -> create address send.
+      const getAccounts = promisify(CreateToken.web3.eth.getAccounts);
+      const accountsList = await getAccounts();
+
+      await CreateToken.web3.eth.sendTransaction({
+        from: accountsList[0],
         to: account,
         value: web3.utils.toWei('10', 'ether'),
       });
-      //
+
+      const nft = await meta.mint(account, ipfsHash, { from: account, gas: 3000000 }); // gas limit 변경
 
       callback(nft);
     } catch (err) {
