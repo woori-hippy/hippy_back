@@ -11,9 +11,9 @@ export const create = async (userId, data) => {
   }
 };
 
-export const findProduct = async (userId, tokenId) => {
+export const findProduct = async userId => {
   try {
-    return prisma.product.findMany({ where: { userId, tokenId } });
+    return prisma.product.findMany({ where: { userId } });
   } catch (err) {
     console.error(err);
   }
