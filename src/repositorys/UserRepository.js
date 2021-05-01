@@ -34,9 +34,10 @@ export const updateCoinAccount = async (id, coinAccount) => {
   }
 };
 
-export const updateWooriAccount = async (id, wooriAccount) => {
+export const updateWooriAccount = async (id, data) => {
+  const { wooriAccount, wooriToken } = data;
   try {
-    return prisma.user.update({ where: { id }, data: { wooriAccount } });
+    return prisma.user.update({ where: { id }, data: { wooriAccount, wooriToken } });
   } catch (err) {
     console.error(err);
   }
