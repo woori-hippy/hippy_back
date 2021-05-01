@@ -1,10 +1,10 @@
 import * as ProductRepository from '../repositorys/ProductRepository';
 
-export const RegisteProduct = async (req, res, next) => {
+export const register = async (req, res) => {
   try {
     req.body.tokenId = Number(req.body.tokenId);
     req.body.price = Number(req.body.price);
-    const productInfo = await ProductRepository.RegisteProduct(req.user.id, req.body);
+    const productInfo = await ProductRepository.create(req.user.id, req.body);
     if (productInfo) {
       res.send({ message: '상품 등록 ㅊㅋ' });
     } else {

@@ -1,14 +1,10 @@
 import express from 'express';
+import * as AuthHelper from '../middlewares/AuthHelper';
 import * as NFTService from '../services/NFTService';
 
 const router = express.Router();
 
-router.get('/getAccounts', NFTService.getAccounts);
-router.post('/getBalance', NFTService.getBalance);
-router.post('/transferNFT', NFTService.transferNFT);
-router.post('/createNFT', NFTService.createNFT);
-router.get('/getAllBalance', NFTService.getAllBalance);
-router.post('/findTokenList', NFTService.findTokenList);
-router.post('/test', NFTService.test);
+router.post('/create', AuthHelper.isLoggedIn, AuthHelper.isArtist, NFTService.create);
+router.post('/estimate', AuthHelper.isLoggedIn, AuthHelper.isArtist, NFTService.estimate);
 
 export default router;

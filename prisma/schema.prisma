@@ -46,6 +46,7 @@ model user {
   email        String    @unique @db.VarChar(255)
   coinAccount  String?   @map("coin_account")
   wooriAccount String?   @map("woori_account")
+  wooriToken   String?   @map("woori_token")
   action       action[]
   product      product[]
 }

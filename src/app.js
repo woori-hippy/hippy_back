@@ -25,7 +25,7 @@ app.use(session({ secret: env.COOKIE_SECRET, resave: false, saveUninitialized: f
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use('/', TestController);
+app.use('/test', TestController);
 app.use('/nft', NFTController);
 app.use('/profile', ProfileController);
 app.use('/auth', AuthController);
