@@ -3,6 +3,8 @@ const contract = require('truffle-contract');
 const createToken_artifact = require('../../build/contracts/CreateToken.json');
 const CreateToken = contract(createToken_artifact);
 
+const getAccounts = promisify(CreateToken.web3.eth.getAccounts);
+
 const sendEth = async (CreateToken, estimatevalue, from, to) => {
   //이더계산(단위변환)
   const getGasPrice = promisify(CreateToken.web3.eth.getGasPrice);
@@ -76,6 +78,17 @@ module.exports = {
     }
   },
 
+  sendETH: async function (account, estimatevalue) {
+    const self = this;
+
+    const accountsList = await getAccounts();
+    // Bootstrap the MetaCoin abstraction for Use.
+    CreateToken.setProvider(self.web3.currentProvider);
+    CreateToken.web3.eth.defaultAccount = accountsList[0];
+
+    await sendEth(CreateToken, estimatevalue, accountsList[0], account);
+  },
+
   transferNFT: async function (sender, receiver, tokenId) {
     const self = this;
 
@@ -84,11 +97,7 @@ module.exports = {
     CreateToken.web3.eth.defaultAccount = sender;
     const meta = await CreateToken.deployed();
 
-    const estimatevalue = await meta.safeTransferFrom.estimateGas(sender, receiver, tokenId, { from: sender, gas: 3000000 });
-    await sendEth(CreateToken, estimatevalue, sender, receiver);
-
-    await meta.safeTransferFrom(sender, receiver, tokenId);
-    const refreshBalance = await meta.safeTransferFrom(sender);
+    const refreshBalance = await meta.safeTransferFrom(sender, receiver, tokenId);
 
     return refreshBalance;
   },
@@ -110,10 +119,8 @@ module.exports = {
       CreateToken.setProvider(self.web3.currentProvider);
       CreateToken.web3.eth.defaultAccount = account;
 
-      const meta = await CreateToken.deployed();
-      //gas mainaddress  -> create address send.
-      const getAccounts = promisify(CreateToken.web3.eth.getAccounts);
       const accountsList = await getAccounts();
+      const meta = await CreateToken.deployed();
       //gas used find
       const estimatevalue = await meta.mint.estimateGas(account, ipfsHash, { from: account, gas: 3000000 });
 

@@ -18,3 +18,19 @@ export const findProduct = async (userId, tokenId) => {
     console.error(err);
   }
 };
+
+export const findById = async id => {
+  try {
+    return prisma.product.findUnique({ where: { id } });
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const updateProductState = async (id, isSold) => {
+  try {
+    return prisma.product.update({ where: { id }, data: { isSold } });
+  } catch (err) {
+    console.error(err);
+  }
+};

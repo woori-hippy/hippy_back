@@ -16,4 +16,6 @@ export default {
   PORT: Number(env.PORT),
   ETHNetwork: env.ETH_NETWORK,
   COOKIE_SECRET: env.COOKIE_SECRET,
+  APPKEY: env.APPKEY,
+  TOEKN: env.TOKEN,
 };
