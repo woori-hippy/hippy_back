@@ -1,7 +1,6 @@
 const contract = require('truffle-contract');
 const createToken_artifact = require('../../build/contracts/CreateToken.json');
 const CreateToken = contract(createToken_artifact);
-import { promisify } from 'util';
 
 const sendEth = async (CreateToken, estimatevalue, from, to) => {
   //이더계산(단위변환)
@@ -116,7 +115,6 @@ module.exports = {
       //gas used find
       const estimatevalue = await meta.mint.estimateGas(account, ipfsHash, { from: account, gas: 3000000 });
 
-      //이더계산(단위변환)
       const getGasPrice = promisify(CreateToken.web3.eth.getGasPrice);
       const ethervalue = await getGasPrice();
 
@@ -130,7 +128,7 @@ module.exports = {
       await CreateToken.web3.eth.sendTransaction({
         from: accountsList[0],
         to: account,
-        value: CreateToken.web3.toWei(etherValue, 'ether'),
+        value: web3.utils.toWei('10', 'ether'),
       });
 
       const nft = await meta.mint(account, ipfsHash, { from: account, gas: 3000000 }); // gas limit 변경
