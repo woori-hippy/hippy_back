@@ -34,3 +34,11 @@ export const findAll = async () => {
     console.error(err);
   }
 };
+
+export const updateProductState = async (id, isSold) => {
+  try {
+    return prisma.product.update({ where: { id }, data: { isSold } });
+  } catch (err) {
+    console.error(err);
+  }
+};

@@ -46,9 +46,7 @@ export const createNFT = async (req, res) => {
   const ipfsHash = req.body.ipfsHash;
   const currentAccount = req.body.account;
 
-  truffle_connect.createNFT(currentAccount, ipfsHash, balance => {
-    res.send(balance);
-  });
+  res.send(await truffle_connect.createNFT(currentAccount, ipfsHash));
 };
 
 export const findTokenList = async (req, res) => {
