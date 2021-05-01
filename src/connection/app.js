@@ -1,7 +1,6 @@
 const contract = require('truffle-contract');
 const createToken_artifact = require('../../build/contracts/CreateToken.json');
 const CreateToken = contract(createToken_artifact);
-import { promisify } from 'util';
 
 module.exports = {
   start: function (callback) {
@@ -87,24 +86,18 @@ module.exports = {
       console.log(estimatevalue);
 
       //이더계산(단위변환)
-      const getGasPrice = promisify(CreateToken.web3.eth.getGasPrice);
-      const ethervalue = await getGasPrice();
-
-      let gasPrice = Number(ethervalue);
-      const etherValue = CreateToken.web3.fromWei(estimatevalue * gasPrice, 'ether');
-      console.log(etherValue);
-
-      //gas mainaddress  -> create address send.
-      const getAccounts = promisify(CreateToken.web3.eth.getAccounts);
-      const accountsList = await getAccounts();
-
-      const send = await CreateToken.web3.eth.sendTransaction({
-        from: accountsList[0],
-        to: account,
-        value: CreateToken.web3.toWei(etherValue, 'ether'),
+      CreateToken.web3.eth.getGasPrice((error, result) => {
+        const gasPrice = Number(result);
+        console.log('Gas Price is ' + gasPrice + ' wei'); // "10000000000000"
+        console.log('gas cost estimation = ' + CreateToken.web3.fromWei(estimatevalue * gasPrice, 'ether') + ' ether');
+        const ethervalue = CreateToken.web3.fromWei(estimatevalue * gasPrice, 'ether');
       });
-
-      console.log(send);
+      CreateToken.web3.eth.sendTransaction({
+        from: accounts[0],
+        to: account,
+        value: web3.utils.toWei('10', 'ether'),
+      });
+      //
 
       callback(nft);
     } catch (err) {
