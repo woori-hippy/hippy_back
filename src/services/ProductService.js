@@ -55,20 +55,12 @@ export const buy = async (req, res) => {
       },
     });
     if (response.status == 200) {
-      console.log(userInfo.coinAccount);
-      console.log(req.user.coinAccount);
-      console.log(tokenId);
       const estimatevalue = await truffleConnect.estimateGasTransferNFT(userInfo.coinAccount, req.user.coinAccount, tokenId);
-      console.log(estimatevalue);
       const send = await truffleConnect.sendETH(userInfo.coinAccount, estimatevalue);
-      console.log(send);
       const NFT = await truffleConnect.transferNFT(userInfo.coinAccount, req.user.coinAccount, tokenId);
-      console.log(NFT);
 
-      await ProductRepository.updateProductState(userId, true);
+      await ProductRepository.updateProductState(ProductInfo.id, true);
       const rate = (price / 100) * 98;
-
-      console.log('test1');
 
       const response = await axios({
         method: 'post',
@@ -97,13 +89,36 @@ export const buy = async (req, res) => {
           token: env.TOKEN,
         },
       });
-
-      res.send(response);
     } else {
       throw new Error('우리은행이 문제임.');
     }
+    res.send({ message: '판매 완료' });
+  } catch (err) {
+    console.error(err);
+  }
+};
 
-    res.send(response);
+export const findAll = async (req, res) => {
+  try {
+    const productInfo = await ProductRepository.findAll();
+    if (productInfo) {
+      res.send(productInfo);
+    } else {
+      throw new Error('알 수 없는 에러 발생');
+    }
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const findById = async (req, res) => {
+  try {
+    const productInfo = await ProductRepository.findById(Number(req.params.id));
+    if (productInfo) {
+      res.send(productInfo);
+    } else {
+      throw new Error('알 수 없는 에러 발생');
+    }
   } catch (err) {
     console.error(err);
   }

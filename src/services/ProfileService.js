@@ -1,3 +1,4 @@
+import * as ProductRepository from '../repositorys/ProductRepository';
 import * as UserRepository from '../repositorys/UserRepository';
 
 const truffle_connect = require('../connection/app.js');
@@ -14,20 +15,26 @@ export const findUser = async (req, res, next) => {
 export const findTokeList = async (req, res, next) => {
   try {
     const NFTList = await truffle_connect.findTokenList(req.user.coinAccount);
-    const NFTListWithOnSale = [];
-    for await (const nft of NFTList) {
-      console.log(nft);
-      //const onSale = await ProductRepository.findProduct(req.user.id, nft.tokenId);
-      //   if (onSale) {
-      //     nft.onSale === true;
-      //     NFTListWithOnSale.push(nft);
-      //   } else {
-      //     nft.onSale === false;
-      //     NFTListWithOnSale.push(nft);
-      //   }
-    }
+    const onSale = await ProductRepository.findProduct(req.user.id);
 
-    res.send({ NFTListWithOnSale });
+    NFTList.sort((a, b) => {
+      if (a.tokenId.toNumber() < b.tokenId.toNumber()) return true;
+      else false;
+    });
+
+    NFTList.map(nft => {
+      nft.onSale = false;
+    });
+
+    onSale.map(sale => {
+      NFTList.map(nft => {
+        if (sale.tokenId === nft.tokenId.toNumber()) {
+          nft.onSale = true;
+        }
+      });
+    });
+
+    res.send(NFTList);
   } catch (err) {
     console.error(err);
     next(err);

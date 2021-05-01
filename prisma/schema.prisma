@@ -7,7 +7,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model action {
+model acution {
   id        Int      @id @default(autoincrement())
   productId Int      @map("product_id")
   userId    Int      @map("user_id")
@@ -16,23 +16,23 @@ model action {
   product   product  @relation(fields: [productId], references: [id])
   user      user     @relation(fields: [userId], references: [id])
 
-  @@index([productId], name: "action_product_fk")
-  @@index([userId], name: "action_user_fk")
+  @@index([productId], name: "acution_product_fk")
+  @@index([userId], name: "acution_user_fk")
 }
 
 model product {
-  id        Int      @id @default(autoincrement())
-  tokenId   Int      @map("token_id")
-  userId    Int      @map("user_id")
+  id        Int       @id @default(autoincrement())
+  tokenId   Int       @map("token_id")
+  userId    Int       @map("user_id")
   price     Int
-  isSold    Boolean  @default(false) @map("is_sold")
-  isAcution Boolean  @default(false) @map("is_acution")
-  createdAt DateTime @default(now()) @map("created_at") @db.DateTime(0)
-  name      String   @db.VarChar(255)
-  src       String   @db.VarChar(255)
-  tag       String   @db.VarChar(255)
-  user      user     @relation(fields: [userId], references: [id])
-  action    action[]
+  isSold    Boolean   @default(false) @map("is_sold")
+  isAcution Boolean   @default(false) @map("is_acution")
+  createdAt DateTime  @default(now()) @map("created_at") @db.DateTime(0)
+  name      String    @db.VarChar(255)
+  src       String    @db.VarChar(255)
+  tag       String    @db.VarChar(255)
+  user      user      @relation(fields: [userId], references: [id])
+  action    acution[]
 
   @@index([userId], name: "product_user_fk")
 }
@@ -47,6 +47,6 @@ model user {
   coinAccount  String?   @map("coin_account")
   wooriAccount String?   @map("woori_account")
   wooriToken   String?   @map("woori_token")
-  action       action[]
+  action       acution[]
   product      product[]
 }
