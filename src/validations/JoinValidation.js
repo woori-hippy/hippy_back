@@ -10,7 +10,6 @@ export const joinRequest = async (req, res, next) => {
     if (!error.isEmpty()) {
       error.throw();
     }
-    console.log(req.body.password);
     next();
   } catch (err) {
     res.status(400);
