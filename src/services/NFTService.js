@@ -27,7 +27,7 @@ export const getAllBalance = (req, res) => {
   });
 };
 
-export const transferNFT = (req, res) => {
+export const transferNFT = async (req, res) => {
   console.log('**** GET /sendCoin ****');
   console.log(req.body);
 
@@ -35,9 +35,8 @@ export const transferNFT = (req, res) => {
   const receiver = req.body.receiver;
   const tokenId = req.body.tokenId;
 
-  truffle_connect.transferNFT(sender, receiver, tokenId, balance => {
-    res.send(balance);
-  });
+  const sendNFT = await truffle_connect.transferNFT(sender, receiver, tokenId);
+  res.send(sendNFT);
 };
 
 export const createNFT = async (req, res) => {
@@ -60,4 +59,14 @@ export const findTokenList = async (req, res) => {
 
   const list = await truffle_connect.findTokenList(currentAccount);
   return res.send(list);
+};
+
+export const test = async (req, res) => {
+  const sender = req.body.sender;
+  const receiver = req.body.receiver;
+  const tokenId = req.body.tokenId;
+  const ipfsHash = req.body.ipfsHash;
+
+  const sendNFT = await truffle_connect.estimateGasTransferNFT(sender, receiver, tokenId);
+  res.send({ sendNFT });
 };
