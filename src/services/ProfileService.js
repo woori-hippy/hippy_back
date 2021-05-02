@@ -23,13 +23,13 @@ export const findTokeList = async (req, res, next) => {
     });
 
     NFTList.map(nft => {
-      nft.onSale = false;
+      nft.productId = null;
     });
 
     onSale.map(sale => {
       NFTList.map(nft => {
         if (sale.tokenId === nft.tokenId.toNumber()) {
-          nft.onSale = true;
+          nft.productId = sale.id;
         }
       });
     });
