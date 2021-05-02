@@ -19,17 +19,17 @@ export const findProduct = async userId => {
   }
 };
 
-export const findById = async id => {
+export const findByIdWithUserNameAndHeart = async id => {
   try {
-    return prisma.product.findUnique({ where: { id } });
+    return prisma.product.findUnique({ where: { id }, include: { user: { select: { name: true } }, heart: true } });
   } catch (err) {
     console.error(err);
   }
 };
 
-export const findAll = async () => {
+export const findAllByNotIsSoldWithUserAndHeart = async () => {
   try {
-    return prisma.product.findMany({});
+    return prisma.product.findMany({ where: { isSold: false }, include: { user: { select: { name: true } }, heart: true } });
   } catch (err) {
     console.error(err);
   }

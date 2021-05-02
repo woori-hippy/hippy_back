@@ -33,6 +33,7 @@ model product {
   tag       String    @db.VarChar(255)
   user      user      @relation(fields: [userId], references: [id])
   action    acution[]
+  heart     heart[]
 
   @@index([userId], name: "product_user_fk")
 }
@@ -49,4 +50,16 @@ model user {
   wooriToken   String?   @map("woori_token")
   action       acution[]
   product      product[]
+  heart        heart[]
+}
+
+model heart {
+  id        Int      @id @default(autoincrement())
+  userId    Int      @map("user_id")
+  productId Int      @map("product_id")
+  product   product? @relation(fields: [productId], references: [id])
+  user      user?    @relation(fields: [userId], references: [id])
+
+  @@index([productId], name: "heart_product_fk")
+  @@index([userId], name: "heart_user_fk")
 }

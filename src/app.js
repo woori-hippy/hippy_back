@@ -8,6 +8,7 @@ import passport from 'passport';
 import env from './configs';
 import passportConfig from './configs/passport';
 import AuthController from './controllers/AuthController';
+import HeartController from './controllers/HeartController';
 import NFTController from './controllers/NFTController';
 import ProductController from './controllers/ProductController';
 import ProfileController from './controllers/ProfileController';
@@ -32,5 +33,6 @@ app.use('/profile', ProfileController);
 app.use('/auth', AuthController);
 app.use('/product', ProductController);
 app.use('/woori', WooriController);
+app.use('/heart', HeartController);
 
 export default app;

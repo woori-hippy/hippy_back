@@ -4,7 +4,7 @@ import truffleConnect from '../connection/app';
 import * as ProductRepository from '../repositorys/ProductRepository';
 import * as UserRepository from '../repositorys/UserRepository';
 
-export const register = async (req, res) => {
+export const register = async (req, res, next) => {
   try {
     req.body.tokenId = Number(req.body.tokenId);
     req.body.price = Number(req.body.price);
@@ -16,15 +16,18 @@ export const register = async (req, res) => {
     }
   } catch (err) {
     console.error(err);
+    next(err);
   }
 };
 
-export const buy = async (req, res) => {
+export const buy = async (req, res, next) => {
   try {
     console.log(req.user);
 
-    const ProductInfo = await ProductRepository.findById(Number(req.body.productId));
+    const ProductInfo = await ProductRepository.findByIdWithUserName(Number(req.body.productId));
     const { price, tokenId, userId } = ProductInfo;
+
+    if (userId === req.user.id) throw new Error('본인의 물건은 구입할 수 없습니다.');
 
     const userInfo = await UserRepository.findById(userId);
     const response = await axios({
@@ -95,36 +98,47 @@ export const buy = async (req, res) => {
     res.send({ message: '판매 완료' });
   } catch (err) {
     console.error(err);
+    next(err);
   }
 };
 
-export const findAll = async (req, res) => {
+export const findAll = async (req, res, next) => {
   try {
-    const productInfo = await ProductRepository.findAll();
-    const productList = [];
-    for await (const product of productInfo) {
-      const ipfs = await truffleConnect.findToken(product.tokenId);
-      product.ipfsHash = ipfs.ipfsHash;
-      productList.push(product);
+    const productList = await ProductRepository.findAllByNotIsSoldWithUserAndHeart();
+
+    if (req.user) {
+      productList.map(product => {
+        product.isClick = false;
+        product.heart.map(heart => {
+          if (heart.userId === req.user.id) product.isClick = true;
+        });
+      });
     }
 
     res.send(productList);
   } catch (err) {
     console.error(err);
+    next(err);
   }
 };
 
-export const findById = async (req, res) => {
+export const findById = async (req, res, next) => {
   try {
-    const productInfo = await ProductRepository.findById(Number(req.params.id));
+    const productInfo = await ProductRepository.findByIdWithUserNameAndHeart(Number(req.params.id));
     if (productInfo) {
-      const ipfs = await truffleConnect.findToken(productInfo.tokenId);
-      productInfo.ipfsHash = ipfs.ipfsHash;
+      if (req.user) {
+        productInfo.isClick = false;
+        productInfo.heart.map(heart => {
+          if (heart.userId === req.user.id) productInfo.isClick = true;
+        });
+      }
+
       res.send(productInfo);
     } else {
-      throw new Error('알 수 없는 에러 발생');
+      throw new Error('해당 상품은 존재하지 않습니다.');
     }
   } catch (err) {
     console.error(err);
+    next(err);
   }
 };
