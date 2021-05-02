@@ -9,6 +9,7 @@ import env from './configs';
 import passportConfig from './configs/passport';
 import AuthController from './controllers/AuthController';
 import NFTController from './controllers/NFTController';
+import OAuthController from './controllers/OAuthController';
 import ProductController from './controllers/ProductController';
 import ProfileController from './controllers/ProfileController';
 import TestController from './controllers/TestController';
@@ -30,6 +31,7 @@ app.use('/test', TestController);
 app.use('/nft', NFTController);
 app.use('/profile', ProfileController);
 app.use('/auth', AuthController);
+app.use('/oauth', OAuthController);
 app.use('/product', ProductController);
 app.use('/woori', WooriController);
 
