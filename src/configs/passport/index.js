@@ -1,6 +1,6 @@
 import * as UserRepository from '../../repositorys/UserRepository';
+import kakaoStrategy from './KakaoStrategy';
 import localStrategy from './LocalStrategy';
-
 export default passport => {
   passport.serializeUser((user, done) => {
     done(null, user.id);
@@ -15,4 +15,5 @@ export default passport => {
     }
   });
   localStrategy(passport);
+  kakaoStrategy(passport);
 };

@@ -17,6 +17,22 @@ export const findByEmailAndLocal = async email => {
   }
 };
 
+export const findByEmailAndKakao = async email => {
+  try {
+    return prisma.user.findMany({ where: { email, provider: 'kakao' } });
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const createByKakao = async (email, name) => {
+  try {
+    return prisma.user.create({ data: { email, name, provider: 'kakao' } });
+  } catch (err) {
+    console.error(err);
+  }
+};
+
 export const createByLocal = async data => {
   const { email, password, name } = data;
   try {
