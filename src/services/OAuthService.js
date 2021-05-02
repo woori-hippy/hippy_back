@@ -1,6 +1,5 @@
 import axios from 'axios';
 import * as UserRepository from '../repositorys/UserRepository';
-const passport = require('passport');
 
 export const kakoSignin = async (req, res, next) => {
   try {

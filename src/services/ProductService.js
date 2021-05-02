@@ -24,7 +24,7 @@ export const buy = async (req, res, next) => {
   try {
     console.log(req.user);
 
-    const ProductInfo = await ProductRepository.findByIdWithUserName(Number(req.body.productId));
+    const ProductInfo = await ProductRepository.findByIdWithUserNameAndHeart(Number(req.body.productId));
     const { price, tokenId, userId } = ProductInfo;
 
     if (userId === req.user.id) throw new Error('본인의 물건은 구입할 수 없습니다.');
