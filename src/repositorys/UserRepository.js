@@ -25,6 +25,14 @@ export const findByEmailAndKakao = async email => {
   }
 };
 
+export const findByEmailAndGoogle = async email => {
+  try {
+    return prisma.user.findMany({ where: { email, provider: 'google' } });
+  } catch (err) {
+    console.error(err);
+  }
+};
+
 export const createByKakao = async (email, name) => {
   try {
     return prisma.user.create({ data: { email, name, provider: 'kakao' } });
@@ -37,6 +45,15 @@ export const createByLocal = async data => {
   const { email, password, name } = data;
   try {
     return prisma.user.create({ data: { password, email, name, provider: 'local' } });
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const createByGoogle = async data => {
+  const { email, password, name } = data;
+  try {
+    return prisma.user.create({ data: { email, name, provider: 'google' } });
   } catch (err) {
     console.error(err);
   }

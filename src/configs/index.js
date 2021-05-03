@@ -10,6 +10,12 @@ else if (NODE_ENV === 'test') dotenv.config({ path: `${__dirname}/../../.env.tes
 
 const env = process.env;
 
+const GOOGLE = {
+  CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
+  CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
+  REDIRECT_URL: process.env.GOOGLE_REDIRECT_URL,
+};
+
 export default {
   NODE_ENV: NODE_ENV,
   HOST: env.HOST,
@@ -18,4 +24,5 @@ export default {
   COOKIE_SECRET: env.COOKIE_SECRET,
   APPKEY: env.APPKEY,
   TOKEN: env.TOKEN,
+  GOOGLE,
 };

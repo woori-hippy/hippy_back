@@ -17,9 +17,9 @@ export const signin = (req, res, next) => {
         return res.status(500).send({ message: '로그인에 실패했습니다.' });
       }
       if (user.isArtist) {
-        res.send({ isArtist: true, name: user.name });
+        res.send({ isArtist: true, name: user.name, email: user.email });
       } else {
-        res.send({ isArtist: false, name: user.name });
+        res.send({ isArtist: false, name: user.name, email: user.email });
       }
     });
   })(req, res, next);
