@@ -1,5 +1,5 @@
 import axios from 'axios';
-import googleapis from 'googleapis';
+import * as googleapis from 'googleapis';
 import env from '../configs/index.js';
 import * as UserRepository from '../repositorys/UserRepository';
 
@@ -50,54 +50,42 @@ export const kakoSignIn = async (req, res, next) => {
 };
 
 export const googleSignIn = async (req, res, next) => {
-  passport.authenticate((err, user) => {
-      const tokens = {
-        expiry_date: req.body.expiry_date,
-        access_token: req.body.access_token,
-        token_type: req.body.token_type,
-        id_token: req.body.id_token,
-        scope: req.body.scope,
-      };
-      oauth2Client.setCredentials(tokens);
-      google.options({ auth: oauth2Client });
+  const tokens = {
+    expiry_date: req.body.expiry_date,
+    access_token: req.body.access_token,
+    token_type: req.body.token_type,
+    id_token: req.body.id_token,
+    scope: req.body.scope,
+  };
+  oauth2Client.setCredentials(tokens);
+  google.options({ auth: oauth2Client });
 
-      const people = google.people({
-        version: 'v1',
-        auth: oauth2Client,
-      });
-      const me = await people.people.get({
-        resourceName: 'people/me',
-        personFields: 'names',
-      });
+  const people = google.people({
+    version: 'v1',
+    auth: oauth2Client,
+  });
+  const me = await people.people.get({
+    resourceName: 'people/me',
+    personFields: 'names',
+  });
 
-      const email = me.data.emailAddresses[0];
+  const email = me.data.emailAddresses[0];
 
-      const user = await UserRepository.findByEmailAndGoogle(email);
-      if (user[0]) {
-        return req.login(user[0], loginError => {
-          if (loginError) {
-            console.error(loginError);
-            return res.status(500).send({ message: '로그인에 실패했습니다.' });
-          }
-          if (user.isArtist) {
-            res.send({ isArtist: true, name: user.name, email: user.email });
-          } else {
-            res.send({ isArtist: false, name: user.name, email: user.email });
-          }
-        });
-      } else {
-        const user = await UserRepository.createByGoogle(email, me.data.names[0]);
-        return req.login(user, loginError => {
-          if (loginError) {
-            console.error(loginError);
-            return res.status(500).send({ message: '로그인에 실패했습니다.' });
-          }
-          if (user.isArtist) {
-            res.send({ isArtist: true, name: user.name });
-          } else {
-            res.send({ isArtist: false, name: user.name });
-          }
-        });
-      }
-  })(req, res, next);
+  const user = await UserRepository.findByEmailAndGoogle(email);
+  if (user[0]) {
+    req.session.passport = { user: user[0].id };
+    if (user.isArtist) {
+      res.send({ isArtist: true, name: user[0].name, email: user[0].email });
+    } else {
+      res.send({ isArtist: false, name: user[0].name, email: user[0].email });
+    }
+  } else {
+    const user = await UserRepository.createByGoogle(email, me.data.names[0]);
+    req.session.passport = { user: user[0].id };
+    if (user.isArtist) {
+      res.send({ isArtist: true, name: user[0].name, email: user[0].email });
+    } else {
+      res.send({ isArtist: false, name: user[0].name, email: user[0].email });
+    }
+  }
 };
